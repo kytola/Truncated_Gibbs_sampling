@@ -40,6 +40,10 @@ def conditional_samp_trunc(sampling_index, current_x,
                 with simulation draws holding fixed other dimensions,
                 with dimensions (Nobs X N variables)
 
+    See Also
+    ----------
+    Kenneth, Train (2003) Discrete Choice Methods with Simulation
+
     """
 
     N_var_axis = 1
