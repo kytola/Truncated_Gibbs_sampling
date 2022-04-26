@@ -12,7 +12,6 @@ def cdf_no_stats(x, mu, sig):
     arg = (x - mu)/(sig*np.sqrt(2))
     return (1 + erf(arg))/2
 
-#@jit(nopython=False)
 @jit(nopython=False, forceobj=True)
 def ppf_no_stats(x, mu, sig):
     return mu + sig*np.sqrt(2)*erfinv(2*x - 1)
