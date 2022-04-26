@@ -5,17 +5,19 @@ import numpy as np
 from scipy.special import erf, erfinv
 from numba import float64, int32, njit, jit
 
-@jit(nopython=False) #, forceobj=True)
+# forceobj=True isn't ideal
+
+@jit(nopython=False, forceobj=True)
 def cdf_no_stats(x, mu, sig):
     arg = (x - mu)/(sig*np.sqrt(2))
     return (1 + erf(arg))/2
 
 #@jit(nopython=False)
-@jit(nopython=False) #, forceobj=True)
+@jit(nopython=False, forceobj=True)
 def ppf_no_stats(x, mu, sig):
     return mu + sig*np.sqrt(2)*erfinv(2*x - 1)
 
-@jit(nopython=False) # , forceobj=True)
+@jit(nopython=False, forceobj=True)
 def conditional_samp_trunc(sampling_index, current_x,
                            mean, cov, p_low, p_high, sims):
 
@@ -152,13 +154,13 @@ def conditional_samp_trunc(sampling_index, current_x,
 
     return new_x
 
-@jit(nopython=False) #, forceobj=True)
+@jit(nopython=False, forceobj=True)
 def trunc_gibbs_sampler(initial_point, mean, cov,
                         p_low, p_high, my_draws):
 
     num_samples = my_draws.shape[0]
 
-    point = initial_point #np.array(initial_point)
+    point = initial_point
 
 
     Nobs = len(p_low)
